@@ -1,36 +1,54 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ungeliebt - Presskit</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
+        
         body {
             background-color: black;
             color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Oswald', sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
         .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
-        h1, h2 {
-            color: #ff0000;
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('background.jpg') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: -1;
         }
-        a {
-            color: #ff0000;
+        h1 {
+            font-size: 4rem;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        p, a {
+            font-size: 1.2rem;
+            color: white;
             text-decoration: none;
+            transition: opacity 0.3s;
         }
         a:hover {
-            text-decoration: underline;
-        }
-        .logo {
-            width: 150px;
-            margin: 20px auto;
+            opacity: 0.7;
         }
         .button {
             background-color: #ff0000;
@@ -40,35 +58,26 @@
             cursor: pointer;
             margin: 10px;
             display: inline-block;
+            transition: transform 0.3s ease;
         }
         .button:hover {
-            background-color: darkred;
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="logo.png" alt="Ungeliebt Logo" class="logo">
+        <div class="background"></div>
         <h1>U N G E L I E B T</h1>
         <p>Luciano Aguirre, productor y DJ de techno hipnótico, raw y cinematográfico.</p>
         
-        <h2>Biografía</h2>
-        <p>"EN LA SOMBRA DE MI EGO CONTEMPLO LA LLAMA DE MI FUEGO"</p>
-        <p>Más de seis años de trayectoria en la producción musical...</p>
-        
-        <h2>Música y Releases</h2>
         <p><a href="https://www.beatport.com/release/chains/3043202" target="_blank">Chains EP - Trau-ma Label</a></p>
         <p><a href="https://open.spotify.com/intl-es/artist/1c8Cc22a4kd1GoUaGKYuJx?si=TLL2yMpPSqymTeMDuiT8Mg" target="_blank">Spotify</a></p>
         
-        <h2>Sets en Vivo</h2>
-        <iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/yourtrackID&color=%23ff0000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <iframe width="80%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/yourtrackID&color=%23ff0000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
         
-        <h2>Tech Rider</h2>
-        <p>MIXER: Xone 96 | Pioneer V-10</p>
-        <p>CDJ: x3</p>
         <a href="tech_rider.pdf" class="button" download>Descargar Tech Rider</a>
         
-        <h2>Contacto</h2>
         <p>Email: <a href="mailto:ungeliebt.ofc@gmail.com">ungeliebt.ofc@gmail.com</a></p>
         <p><a href="https://www.instagram.com/ungeliebt_art/" target="_blank">Instagram</a> | <a href="https://es.ra.co/dj/ungeliebt" target="_blank">Resident Advisor</a></p>
     </div>
