@@ -3,48 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ungeliebt | Presskit</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Ungeliebt - Presskit</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url('background.jpg') no-repeat center center/cover;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        h1 {
+            font-size: 4rem;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .bio {
+            max-width: 800px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 2.5s forwards;
+        }
+
+        .links a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            transition: opacity 0.3s;
+        }
+
+        .links a:hover {
+            opacity: 0.7;
+        }
+
+        .button {
+            background-color: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Ungeliebt</h1>
-        <p>Techno Hipnótico | Raw | Oscuro</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#bio">Biografía</a></li>
-            <li><a href="#musica">Música</a></li>
-            <li><a href="#tech-rider">Tech Rider</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
-    </nav>
-    <section id="bio">
-        <h2>Biografía</h2>
-        <p>Luciano Aguirre, mejor conocido como Ungeliebt, es un productor y DJ de música electrónica oriundo de Buenos Aires, Argentina. Con más de seis años de trayectoria, su estilo se sumerge en los géneros techno, raw e hypnotic, fusionando atmósferas oscuras y cinematográficas.</p>
-    </section>
-    <section id="musica">
-        <h2>Música</h2>
-        <ul>
-            <li><a href="https://www.beatport.com/release/chains/3043202">Ungeliebt - Chains EP (Trau-ma Label)</a></li>
-            <li><a href="http://www.beatport.com/release/profundo-y-silencioso-ep/4797043">Ungeliebt - Profundo y Silencioso EP (Black Square Recordings)</a></li>
-            <li><a href="https://www.beatport.com/track/promise-land/12702754">The Unborn Child & Ungeliebt - Promise Land (Anaoh Label)</a></li>
-            <li><a href="https://www.beatport.com/track/redemption/12883686">The Unborn Child & Ungeliebt - Redemption (Trau-ma Label)</a></li>
-        </ul>
-    </section>
-    <section id="tech-rider">
-        <h2>Tech Rider</h2>
-        <p>MIXER: Xone 96 | Pioneer V-10</p>
-        <p>CDJ: x3</p>
-    </section>
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <p>Email: <a href="mailto:ungeliebt.ofc@gmail.com">ungeliebt.ofc@gmail.com</a></p>
-        <p><a href="https://www.instagram.com/ungeliebt_art/">Instagram</a></p>
-        <p><a href="https://es.ra.co/dj/ungeliebt">Resident Advisor</a></p>
-        <p><a href="https://soundcloud.com/ungeliebt">SoundCloud</a></p>
-        <p><a href="https://open.spotify.com/intl-es/artist/1c8Cc22a4kd1GoUaGKYuJx?si=TLL2yMpPSqymTeMDuiT8Mg">Spotify</a></p>
-    </section>
+    <div class="container">
+        <img src="logo.png" alt="Ungeliebt Logo" class="logo">
+        <h1>U N G E L I E B T</h1>
+        <p class="bio">
+            Luciano Aguirre, productor y DJ de techno hipnótico, raw y cinematográfico.<br>
+            Con una trayectoria de 6 años, ha lanzado en sellos como Trau-ma y Anaoh.
+        </p>
+
+        <div class="links">
+            <a href="https://www.beatport.com/release/chains/3043202" target="_blank">Chains EP - Trau-ma Label</a>
+            <a href="https://open.spotify.com/artist/1c8Cc22a4kd1GoUaGKYuJx" target="_blank">Spotify</a>
+            <a href="https://www.instagram.com/ungeliebt_art/" target="_blank">Instagram</a>
+            <a href="https://es.ra.co/dj/ungeliebt" target="_blank">Resident Advisor</a>
+        </div>
+
+        <a href="tech_rider.pdf" class="button" download>Descargar Tech Rider</a>
+    </div>
 </body>
 </html>
-
