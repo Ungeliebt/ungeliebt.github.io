@@ -8,101 +8,111 @@
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 
         body {
-            background-color: #0b0b0b;
-            color: #e0e0e0;
+            background-color: black;
+            color: white;
             font-family: 'Oswald', sans-serif;
             margin: 0;
             padding: 0;
         }
 
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('background.jpg') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
         .container {
             max-width: 900px;
-            margin: auto;
-            padding: 2rem;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
         h1 {
             font-size: 3rem;
             text-align: center;
-            letter-spacing: 8px;
-            margin-bottom: 0.5rem;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
         }
 
         h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 0.3rem;
+            font-size: 1.5rem;
+            margin-top: 40px;
         }
 
         p, a {
             font-size: 1.1rem;
-            line-height: 1.6;
-            color: #ccc;
+            line-height: 1.8;
+            color: white;
             text-decoration: none;
         }
 
         a:hover {
-            text-decoration: underline;
+            opacity: 0.7;
         }
 
-        .social-links {
-            margin-top: 2rem;
+        .links {
+            margin: 20px 0;
         }
 
         iframe {
             width: 100%;
-            height: 200px;
-            margin-top: 1.5rem;
+            height: 160px;
+            margin: 30px 0;
             border: none;
         }
 
         .section {
-            margin-bottom: 3rem;
+            margin-top: 60px;
         }
-
-        .tech-rider {
-            background-color: #1a1a1a;
-            padding: 1rem;
-            border-left: 4px solid #ff0000;
-        }
-
     </style>
 </head>
 <body>
+    <div class="background"></div>
     <div class="container">
         <h1>U N G E L I E B T</h1>
 
-        <div class="section">
-            <h2>Biografía</h2>
-            <p>Luciano Gabriel Aguirre, también conocido como *Ungeliebt*, es un artista argentino oriundo de la ciudad de Buenos Aires. Comenzó su camino en la producción musical hace seis años, motivado por una necesidad interna de expresar su mundo emocional a través del sonido.</p>
-            <p>Con influencias que van desde el techno hipnótico, raw, peak time hasta lo cinematográfico, su obra se sumerge en un universo oscuro y atmosférico. Sus primeros lanzamientos fueron independientes, aunque rápidamente se posicionó en el circuito underground con el EP “Chains” en el sello Trau-ma, propiedad de Robert Hoff. También participó en VAs y colaboraciones en sellos como Anaoh, dirigido por Fixon y Dig-it.</p>
-            <p>Actualmente trabaja en su propio sello discográfico, *Viuda Negra*, desde donde impulsa una estética sonora y visual cohesionada, con una fuerte presencia narrativa.</p>
-        </div>
+        <h2>Biografía</h2>
+        <p>
+            Luciano Gabriel Aguirre es el nombre detrás de *ungeliebt*, DJ y productor oriundo de Buenos Aires, Argentina.
+            Su viaje musical comenzó hace seis años, tiempo en el cual se ha sumergido profundamente en la creación de música techno hipnótico, raw y cinematográfico.
+        </p>
+        <p>
+            Su enfoque artístico se caracteriza por un sonido oscuro, introspectivo y en constante evolución, con una clara influencia de elementos industriales y cinematográficos.
+            Sus producciones buscan generar una experiencia inmersiva, tanto emocional como mental, diseñadas para la pista de baile pero también para la contemplación.
+        </p>
+        <p>
+            Sus primeros lanzamientos fueron de manera independiente, incluyendo su EP "Chains" en el sello Trau-ma de Robert Hoff, y colaboraciones en los sellos Anaoh de Fixon y Dig-it.
+            Con una visión clara y compromiso hacia su arte, *ungeliebt* continúa explorando los límites del techno, dejando una marca personal en cada producción y set.
+        </p>
 
         <div class="section">
             <h2>Escuchá</h2>
-            <iframe scrolling="no" allow="autoplay"
-                src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep&color=%23ff0000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-            </iframe>
+            <div class="links">
+                <p><a href="https://www.beatport.com/release/chains/3043202" target="_blank">Chains EP - Trau-ma Label</a></p>
+                <p><a href="https://soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep" target="_blank">Profundo y Silencioso EP - Eclipse Recordings</a></p>
+                <p><a href="https://open.spotify.com/intl-es/artist/1c8Cc22a4kd1GoUaGKYuJx?si=TLL2yMpPSqymTeMDuiT8Mg" target="_blank">Spotify</a></p>
+            </div>
+
+            <iframe scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep&color=%23ff0000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
         </div>
 
         <div class="section">
             <h2>Tech Rider</h2>
-            <div class="tech-rider">
-                <p>Setup: 3 CDJ 2000NXS2 + Mixer DJM-900NXS2 o similar. Pendrive y auriculares propios.</p>
-                <p>Requisitos: Booth estable y aislado de vibraciones, retorno confiable. Iluminación tenue.</p>
-                <p>Disponibilidad: Flexible con aviso previo. Requiere alojamiento si el evento es fuera de CABA.</p>
-            </div>
+            <p>
+                - 2 CDJ Nexus 2000/3000 <br>
+                - 1 Mixer DJM 900 NXS o Xone 92 <br>
+                - Monitoreo de cabina de alta calidad <br>
+                - Agua / Toalla <br>
+                - Espacio cómodo para trabajar con laptop
+            </p>
         </div>
 
         <div class="section">
-            <h2>Links</h2>
-            <p><a href="https://www.beatport.com/release/chains/3043202" target="_blank">Chains EP - Trau-ma Label</a></p>
-            <p><a href="https://open.spotify.com/intl-es/artist/1c8Cc22a4kd1GoUaGKYuJx?si=TLL2yMpPSqymTeMDuiT8Mg" target="_blank">Spotify</a></p>
-        </div>
-
-        <div class="section social-links">
             <h2>Contacto</h2>
             <p>Email: <a href="mailto:ungeliebt.ofc@gmail.com">ungeliebt.ofc@gmail.com</a></p>
             <p><a href="https://www.instagram.com/ungeliebt_art/" target="_blank">Instagram</a> | <a href="https://es.ra.co/dj/ungeliebt" target="_blank">Resident Advisor</a></p>
