@@ -1,114 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ungeliebt - Presskit</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ungeliebt - Presskit</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            background: url('background.jpg') no-repeat center center/cover;
-            color: white;
-            font-family: 'Oswald', sans-serif;
-            text-align: center;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Oswald', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-        .container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            backdrop-filter: blur(5px);
-        }
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://raw.githubusercontent.com/Ungeliebt/Ungeliebt.github.io/main/background.jpg') no-repeat center center/cover;
+      opacity: 0.15;
+      z-index: -1;
+      filter: grayscale(100%);
+    }
 
-        .logo {
-            width: 150px;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeIn 1.5s forwards;
-        }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
 
-        h1 {
-            font-size: 4rem;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-        }
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 10px;
+      margin-bottom: 20px;
+    }
 
-        .bio {
-            max-width: 800px;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            opacity: 0;
-            animation: fadeIn 2.5s forwards;
-        }
+    p {
+      font-size: 1.1rem;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
 
-        .links a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin: 10px 0;
-            transition: opacity 0.3s;
-        }
+    a {
+      color: #ff0000;
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
-        .links a:hover {
-            opacity: 0.7;
-        }
+    a:hover {
+      opacity: 0.7;
+    }
 
-        .button {
-            background-color: #ff0000;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-            display: inline-block;
-            transition: transform 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 3s forwards;
-        }
+    .button {
+      background-color: transparent;
+      color: #fff;
+      border: 1px solid #ff0000;
+      padding: 10px 20px;
+      margin: 20px auto;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
 
-        .button:hover {
-            transform: scale(1.1);
-        }
+    .button:hover {
+      background-color: #ff0000;
+      color: #000;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    iframe {
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+
+    .logo {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      margin: 40px 0;
+      height: 1px;
+      background: #333;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <img src="logo.png" alt="Ungeliebt Logo" class="logo">
-        <h1>U N G E L I E B T</h1>
-        <p class="bio">
-            Luciano Aguirre, productor y DJ de techno hipnótico, raw y cinematográfico.<br>
-            Con una trayectoria de 6 años, ha lanzado en sellos como Trau-ma y Anaoh.
-        </p>
+  <div class="background"></div>
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/Ungeliebt/Ungeliebt.github.io/main/logo.png" alt="Logo" class="logo">
+    
+    <h1>U N G E L I E B T</h1>
+    
+    <p>Luciano Aguirre, DJ y productor nacido en Buenos Aires, Argentina, lleva más de 6 años explorando el diseño sonoro y la música electrónica.</p>
+    <p>Sus producciones están orientadas al techno hipnótico, raw y cinematográfico. Como DJ, sus sets se caracterizan por una construcción narrativa intensa, rítmica y oscura, que busca desatar emociones desde el inconsciente.</p>
+    
+    <p>
+      <a href="https://www.beatport.com/release/chains/3043202" target="_blank">Chains EP - Trau-ma Label</a>
+      <br/>
+      <a href="https://open.spotify.com/intl-es/artist/1c8Cc22a4kd1GoUaGKYuJx?si=TLL2yMpPSqymTeMDuiT8Mg" target="_blank">Spotify</a>
+    </p>
 
-        <div class="links">
-            <a href="https://www.beatport.com/release/chains/3043202" target="_blank">Chains EP - Trau-ma Label</a>
-            <a href="https://open.spotify.com/artist/1c8Cc22a4kd1GoUaGKYuJx" target="_blank">Spotify</a>
-            <a href="https://www.instagram.com/ungeliebt_art/" target="_blank">Instagram</a>
-            <a href="https://es.ra.co/dj/ungeliebt" target="_blank">Resident Advisor</a>
-        </div>
+    <iframe width="100%" height="166" scrolling="no" frameborder="no"
+      allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/yourtrackID&color=%23ff0000&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=true">
+    </iframe>
 
-        <a href="tech_rider.pdf" class="button" download>Descargar Tech Rider</a>
-    </div>
+    <div class="divider"></div>
+
+    <a href="tech_rider.pdf" class="button" download>Descargar Tech Rider</a>
+
+    <div class="divider"></div>
+
+    <p>ungeliebt.ofc@gmail.com</p>
+    <p>
+      <a href="https://www.instagram.com/ungeliebt_art/" target="_blank">Instagram</a> |
+      <a href="https://es.ra.co/dj/ungeliebt" target="_blank">Resident Advisor</a>
+    </p>
+  </div>
 </body>
 </html>
