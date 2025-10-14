@@ -80,3 +80,39 @@ footer {
         width: 100px;
     }
 }
+/* --- Menú hamburguesa --- */
+.menu-toggle {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* --- Vista móvil --- */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #111;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 20px 0;
+        margin: 0;
+    }
+
+    nav.active ul {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
