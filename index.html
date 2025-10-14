@@ -7,14 +7,31 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 
+    /* ---------- BASE ---------- */
     body {
       background-color: black;
       color: white;
       font-family: 'Oswald', sans-serif;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
+      animation: fadeIn 1.5s ease-in-out;
+      scroll-behavior: smooth;
     }
 
+    /* Línea lateral de energía */
+    body::before {
+      content: "";
+      position: fixed;
+      left: 2%;
+      top: 0;
+      width: 1px;
+      height: 100vh;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
+      z-index: 10;
+    }
+
+    /* Fondo granulado y en movimiento */
     .background {
       position: fixed;
       top: 0;
@@ -23,9 +40,22 @@
       height: 100%;
       background: url('background.jpg') no-repeat center center/cover;
       opacity: 0.1;
-      z-index: -1;
+      z-index: -2;
+    }
+    .background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('grain-texture.png') repeat;
+      opacity: 0.05;
+      animation: moveGrain 10s linear infinite;
+    }
+    @keyframes moveGrain {
+      from { background-position: 0 0; }
+      to { background-position: 100px 100px; }
     }
 
+    /* ---------- CABECERA ---------- */
     header {
       background-color: #111;
       padding: 20px;
@@ -38,12 +68,26 @@
       text-align: center;
       letter-spacing: 6px;
       margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      animation: flicker 6s infinite;
       transition: all 0.3s ease;
+    }
+
+    h1:hover {
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.6; }
     }
 
     h2 {
       font-size: 1.5rem;
       margin-top: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     p, a {
@@ -53,14 +97,26 @@
       text-decoration: none;
     }
 
-    a:hover {
-      opacity: 0.7;
+    a {
+      position: relative;
     }
 
-    nav {
-      background-color: #000;
+    a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 1px;
+      left: 0;
+      bottom: 0;
+      background: white;
+      transition: width 0.3s ease;
     }
 
+    a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------- MENÚ ---------- */
     nav ul {
       list-style: none;
       margin: 0;
@@ -68,19 +124,15 @@
       display: flex;
       justify-content: center;
       gap: 20px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
 
-    nav ul li {
-      margin: 10px 0;
+    nav.active ul {
+      display: flex;
+      opacity: 1;
     }
 
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-
-    /* --- Menú hamburguesa --- */
     .menu-toggle {
       display: none;
       font-size: 2rem;
@@ -88,11 +140,7 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      transition: transform 0.3s ease;
-    }
-
-    .menu-toggle.active {
-      transform: rotate(90deg);
+      z-index: 20;
     }
 
     .menu-toggle span {
@@ -107,43 +155,18 @@
     .menu-toggle.active span:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
     }
-
     .menu-toggle.active span:nth-child(2) {
       opacity: 0;
     }
-
     .menu-toggle.active span:nth-child(3) {
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
+    /* ---------- CONTENIDO ---------- */
     .container {
       max-width: 900px;
       margin: 0 auto;
       padding: 40px 20px;
-    }
-
-    .links {
-      margin: 20px 0;
-    }
-
-    .links ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .links li {
-      margin-bottom: 10px;
-    }
-
-    iframe {
-      width: 100%;
-      height: 160px;
-      margin: 30px 0;
-      border: none;
-    }
-
-    .section {
-      margin-top: 60px;
     }
 
     .bio-container {
@@ -161,6 +184,9 @@
     .bio-img {
       max-width: 300px;
       border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     .bio-block {
@@ -168,38 +194,54 @@
       padding: 15px;
       border-radius: 10px;
       margin-bottom: 15px;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
 
-    .techrider {
-      background-color: rgba(255, 255, 255, 0.1);
+    .bio-block:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.01);
+    }
+
+    iframe {
+      width: 100%;
+      height: 160px;
+      margin: 30px 0;
+      border: none;
+    }
+
+    /* ---------- SECCIONES ---------- */
+    .section {
+      margin-top: 60px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .techrider, .social {
+      background-color: rgba(255, 255, 255, 0.05);
       padding: 15px;
       border-radius: 10px;
-      margin-top: 40px;
     }
 
-    .social {
-      margin-top: 40px;
+    footer {
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.9rem;
+      margin-top: 50px;
+      padding-bottom: 20px;
     }
 
-    .social ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
+    /* ---------- ANIMACIONES ---------- */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    .social li a {
-      font-size: 1.1rem;
-      color: white;
-      text-decoration: underline;
-    }
-
-    /* --- Diseño responsive para móviles --- */
+    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 768px) {
       h1 {
         font-size: 2.2rem;
-        letter-spacing: 2px; /* Corrige el desalineado */
+        letter-spacing: 2px;
       }
 
       .bio-container {
@@ -236,6 +278,11 @@
   </style>
 </head>
 <body>
+    <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="preloader-text">U N G E L I E B T</div>
+  </div>
+
   <div class="background"></div>
 
   <header>
@@ -261,69 +308,69 @@
       <img src="foto 1.jpg" alt="Ungeliebt" class="bio-img">
       <div class="bio-text">
         <div class="bio-block">
-          <p>Luciano Aguirre, mejor conocido como Ungeliebt, es un productor y DJ de música electrónica oriundo de Buenos Aires, Argentina, con más de seis años de trayectoria en la producción musical. Enfocado en los géneros techno, raw e hypnotic, su estilo combina influencias del techno hipnótico y oscuro, creando atmósferas profundas y cargadas de misterio, moviéndose entre lo crudo y lo cinematográfico.</p>
+          <p>Luciano Aguirre, mejor conocido como Ungeliebt, es un productor y DJ de música electrónica oriundo de Buenos Aires, Argentina...</p>
         </div>
         <div class="bio-block">
-          <p>Sus primeros lanzamientos independientes fueron en Trau-ma, el sello de Robert Hoff, donde debutó con el E.P. <i>Chains</i>. Además, ha lanzado música en colaboración en <i>Anaoh</i>, el sello de Fixon y Dig-it, consolidando una presencia auténtica en el circuito under. Con una visión que explora la complejidad emocional a través del sonido, Luciano canaliza sus raíces astrológicas y su búsqueda espiritual en cada mezcla y producción, llevándolas a un nivel que busca resonar no solo en el oído, sino en la psique del oyente.</p>
+          <p>Sus primeros lanzamientos independientes fueron en Trau-ma, el sello de Robert Hoff...</p>
         </div>
         <div class="bio-block">
-          <p>Actualmente se encuentra trabajando para lanzar su sello discográfico, <i>Viuda Negra</i>, reflejando su estética, fusionando la oscuridad y el misticismo en una propuesta visual y auditiva única. Como <i>Ungeliebt</i>, ha compartido su música en eventos reconocidos por su autenticidad y puesta en escena inmersiva en el under.</p>
+          <p>Actualmente se encuentra trabajando para lanzar su sello discográfico, <i>Viuda Negra</i>...</p>
         </div>
       </div>
     </div>
 
     <div class="section" id="musica">
       <h2>EP - Profundo y Silencioso</h2>
-      <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/occultus_records/sets/profundo-y-silencioso-ep&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
-      </iframe>
+      <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/occultus_records/sets/profundo-y-silencioso-ep&color=%23000000&auto_play=false"></iframe>
     </div>
 
     <div class="section links">
       <h2>Enlaces a lanzamientos</h2>
       <ul>
-        <li><a href="https://soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep" target="_blank">Profundo y Silencioso - EP</a></li>
-        <li><a href="https://soundcloud.com/trauma-records/sets/ungeliebt-chains" target="_blank">Chains - EP</a></li>
-        <li><a href="https://soundcloud.com/anaohltd/sets/promise-land" target="_blank">Promise Land</a></li>
-        <li><a href="https://soundcloud.com/anaohltd/sets/redemption" target="_blank">Redemption</a></li>
+        <li><a href="#">Profundo y Silencioso - EP</a></li>
+        <li><a href="#">Chains - EP</a></li>
       </ul>
     </div>
-    
-    <h2>DJ Sets</h2>
-    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/praxisbcn/praxis-series-012-ungeliebt&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
-    </iframe>
-
-    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ungeliebt/ungeliebt-podcast&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
-    </iframe>
 
     <div class="section techrider" id="techrider">
       <h2>Tech Rider</h2>
       <ul>
-        <li>Cabina estable, preferentemente aislada de vibraciones externas.</li>
-        <li>3x CDJ 2000NXS2 o superior, 1x mixer DJM 900NXS2 o Xone 96.</li>
-        <li>1x monitor de retorno ubicado a la altura del oído.</li>
+        <li>Cabina estable...</li>
+        <li>3x CDJ...</li>
       </ul>
     </div>
 
     <div class="section social" id="contacto">
       <h2>Redes Sociales & Contacto</h2>
       <ul>
-        <li><a href="https://www.instagram.com/ungeliebt.techno" target="_blank">Instagram</a></li>
-        <li><a href="https://soundcloud.com/ungeliebt" target="_blank">SoundCloud</a></li>
-        <li><a href="mailto:ungeliebttechno@gmail.com">Email: ungutliebtechno@gmail.com</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">SoundCloud</a></li>
       </ul>
     </div>
+
+    <footer>© 2025 Ungeliebt | Viuda Negra</footer>
   </div>
 
   <script>
+    // Menú hamburguesa
     function toggleMenu() {
       const nav = document.getElementById('main-nav');
       const toggle = document.getElementById('menu-toggle');
       nav.classList.toggle('active');
       toggle.classList.toggle('active');
     }
+
+    // Efecto de aparición al hacer scroll
+    const elements = document.querySelectorAll('.section, .bio-img, h2');
+    window.addEventListener('scroll', () => {
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }
+      });
+    });
   </script>
 </body>
 </html>
