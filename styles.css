@@ -46,3 +46,37 @@ footer {
     padding: 10px;
     font-size: 0.8em;
 }
+
+/* --- Diseño responsive para móviles --- */
+@media (max-width: 768px) {
+    body {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        letter-spacing: 2px;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    ul li {
+        margin: 5px 0;
+    }
+
+    iframe {
+        width: 100%;
+        height: 180px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+}
