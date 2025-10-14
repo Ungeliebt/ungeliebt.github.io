@@ -1,53 +1,283 @@
+/* =====================================================
+   ESTILO PRINCIPAL - UNGELIEBT PRESSKIT
+   ===================================================== */
+
+/* ---------- FUENTE BASE ---------- */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #111;
+    font-family: 'Oswald', Arial, sans-serif;
+    background-color: #000;
     color: #fff;
     text-align: center;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    animation: fadeIn 1.5s ease-in-out;
+    scroll-behavior: smooth;
 }
 
+/* ---------- LÍNEA LATERAL DE ENERGÍA ---------- */
+body::before {
+    content: "";
+    position: fixed;
+    left: 2%;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
+    z-index: 10;
+}
+
+/* ---------- FONDO GRANULADO Y ANIMADO ---------- */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('background.jpg') no-repeat center center/cover;
+    opacity: 0.1;
+    z-index: -2;
+}
+
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('grain-texture.png') repeat;
+    opacity: 0.05;
+    animation: moveGrain 10s linear infinite;
+}
+
+@keyframes moveGrain {
+    from { background-position: 0 0; }
+    to { background-position: 100px 100px; }
+}
+
+/* =====================================================
+   PRELOADER
+   ===================================================== */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeOut 1.5s ease 1.8s forwards;
+}
+
+.preloader-text {
+    font-size: 2.5rem;
+    letter-spacing: 10px;
+    color: white;
+    opacity: 0;
+    animation: fadeInText 1s ease forwards;
+}
+
+@keyframes fadeInText {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* =====================================================
+   CABECERA
+   ===================================================== */
 header {
+    background-color: #111;
     padding: 20px;
-    background-color: #222;
-}
-
-.logo {
-    width: 150px;
-    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
 }
 
 h1 {
-    font-size: 2.5em;
-    margin: 0;
+    font-size: 3rem;
+    letter-spacing: 6px;
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    animation: flicker 6s infinite;
+    transition: all 0.3s ease;
 }
 
-section {
-    padding: 20px;
+h1:hover {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
 }
 
-ul {
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.6; }
+}
+
+/* =====================================================
+   MENÚ
+   ===================================================== */
+nav ul {
     list-style: none;
+    margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
-ul li {
+nav.active ul {
+    display: flex;
+    opacity: 1;
+}
+
+nav ul li {
     margin: 10px 0;
 }
 
 a {
-    color: #ff3333;
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
+    position: relative;
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 1px;
+    left: 0;
+    bottom: 0;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* ---------- MENÚ HAMBURGUESA ---------- */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 20;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 5px auto;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* =====================================================
+   CONTENIDO
+   ===================================================== */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+section, .section {
+    padding: 20px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.bio-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.bio-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.bio-img {
+    max-width: 300px;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.bio-block {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.bio-block:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.01);
+}
+
+iframe {
+    width: 100%;
+    height: 160px;
+    margin: 30px 0;
+    border: none;
+}
+
+.techrider, .social {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
 }
 
 footer {
-    background-color: #222;
-    padding: 10px;
-    font-size: 0.8em;
+    background-color: transparent;
+    padding: 20px;
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.3);
 }
 
-/* --- Diseño responsive para móviles --- */
+/* =====================================================
+   ANIMACIONES GLOBALES
+   ===================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* =====================================================
+   RESPONSIVE (MÓVILES)
+   ===================================================== */
 @media (max-width: 768px) {
     body {
         font-size: 0.9rem;
@@ -55,7 +285,7 @@ footer {
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 2.2rem;
         letter-spacing: 2px;
     }
 
@@ -63,35 +293,21 @@ footer {
         padding: 10px;
     }
 
-    section {
-        padding: 10px;
+    .bio-container {
+        flex-direction: column;
+        align-items: center;
     }
 
-    ul li {
-        margin: 5px 0;
+    .bio-img {
+        max-width: 90%;
+        margin-bottom: 20px;
     }
 
     iframe {
         width: 100%;
-        height: 180px;
+        height: 200px;
     }
 
-    .logo {
-        width: 100px;
-    }
-}
-/* --- Menú hamburguesa --- */
-.menu-toggle {
-    display: none;
-    font-size: 1.8em;
-    cursor: pointer;
-    background-color: #222;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* --- Vista móvil --- */
-@media (max-width: 768px) {
     nav ul {
         display: none;
         flex-direction: column;
@@ -115,65 +331,8 @@ footer {
     nav ul li {
         margin: 10px 0;
     }
-}
-nav ul {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
 
-nav.active ul {
-  display: flex;
-  opacity: 1;
-}
-h1 {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-h1:hover {
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
-  transition: all 0.3s ease;
-}
-.bio-block {
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-.bio-block:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  transform: scale(1.01);
-}
-html {
-  scroll-behavior: smooth;
-}
-body {
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-a {
-  position: relative;
-}
-a::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 1px;
-  left: 0;
-  bottom: 0;
-  background: white;
-  transition: width 0.3s ease;
-}
-a:hover::after {
-  width: 100%;
-}
-@keyframes flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    opacity: 1;
-  }
-  20%, 24%, 55% {
-    opacity: 0.6;
-  }
-}
-h1 {
-  animation: flicker 6s infinite;
+    .logo {
+        width: 100px;
+    }
 }
