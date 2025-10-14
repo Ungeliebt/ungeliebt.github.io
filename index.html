@@ -19,7 +19,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Línea lateral de energía */
     body::before {
       content: "";
       position: fixed;
@@ -31,7 +30,7 @@
       z-index: 10;
     }
 
-    /* Fondo granulado y en movimiento */
+    /* Fondo granulado */
     .background {
       position: fixed;
       top: 0;
@@ -55,31 +54,95 @@
       to { background-position: 100px 100px; }
     }
 
+    /* ---------- PRELOADER ---------- */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .preloader-text {
+      color: white;
+      font-size: 2rem;
+      letter-spacing: 8px;
+      animation: glitchIntro 1.8s ease-in-out;
+    }
+
+    @keyframes glitchIntro {
+      0% { opacity: 0; transform: scale(1.1); text-shadow: 2px 0 red, -2px 0 blue; }
+      15% { opacity: 1; transform: scale(1.03); text-shadow: -2px 0 red, 2px 0 blue; }
+      35% { text-shadow: 3px 0 red, -3px 0 blue; }
+      55% { transform: scale(1.08); text-shadow: -2px 0 red, 2px 0 blue; }
+      75% { opacity: 1; transform: scale(1); text-shadow: none; }
+      100% { opacity: 0; }
+    }
+
+    /* ---------- GLITCH + TITULO ---------- */
+    h1 {
+      position: relative;
+      font-size: 3rem;
+      letter-spacing: 6px;
+      margin-bottom: 10px;
+      text-align: center;
+      animation: flicker 6s infinite;
+    }
+
+    h1::before,
+    h1::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    h1::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+    }
+
+    h1::after {
+      left: -2px;
+      text-shadow: -2px 0 blue;
+      animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim-1 {
+      0% { clip: rect(42px, 9999px, 44px, 0); }
+      10% { clip: rect(12px, 9999px, 30px, 0); }
+      20% { clip: rect(52px, 9999px, 80px, 0); }
+      30% { clip: rect(32px, 9999px, 60px, 0); }
+      40%, 100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(12px, 9999px, 60px, 0); }
+      10% { clip: rect(52px, 9999px, 80px, 0); }
+      20% { clip: rect(32px, 9999px, 44px, 0); }
+      30%, 100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.6; }
+    }
+
     /* ---------- CABECERA ---------- */
     header {
       background-color: #111;
       padding: 20px;
       text-align: center;
       position: relative;
-    }
-
-    h1 {
-      font-size: 3rem;
-      text-align: center;
-      letter-spacing: 6px;
-      margin-bottom: 10px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      animation: flicker 6s infinite;
-      transition: all 0.3s ease;
-    }
-
-    h1:hover {
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
-    }
-
-    @keyframes flicker {
-      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-      20%, 24%, 55% { opacity: 0.6; }
     }
 
     h2 {
@@ -95,10 +158,6 @@
       line-height: 1.8;
       color: white;
       text-decoration: none;
-    }
-
-    a {
-      position: relative;
     }
 
     a::after {
@@ -209,7 +268,6 @@
       border: none;
     }
 
-    /* ---------- SECCIONES ---------- */
     .section {
       margin-top: 60px;
       opacity: 0;
@@ -231,7 +289,6 @@
       padding-bottom: 20px;
     }
 
-    /* ---------- ANIMACIONES ---------- */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -240,8 +297,9 @@
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 768px) {
       h1 {
-        font-size: 2.2rem;
-        letter-spacing: 2px;
+        font-size: 2.3rem;
+        letter-spacing: 3px;
+        word-spacing: 4px;
       }
 
       .bio-container {
@@ -278,7 +336,7 @@
   </style>
 </head>
 <body>
-    <!-- PRELOADER -->
+  <!-- PRELOADER -->
   <div id="preloader">
     <div class="preloader-text">U N G E L I E B T</div>
   </div>
@@ -286,7 +344,7 @@
   <div class="background"></div>
 
   <header>
-    <h1>U N G E L I E B T</h1>
+    <h1 data-text="U N G E L I E B T">U N G E L I E B T</h1>
     <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
       <span></span>
       <span></span>
@@ -308,13 +366,13 @@
       <img src="foto 1.jpg" alt="Ungeliebt" class="bio-img">
       <div class="bio-text">
         <div class="bio-block">
-          <p>Luciano Aguirre, mejor conocido como Ungeliebt, es un productor y DJ de música electrónica oriundo de Buenos Aires, Argentina...</p>
+          <p>Luciano Aguirre, mejor conocido como Ungeliebt, es un productor y DJ de música electrónica oriundo de Buenos Aires, Argentina, con más de seis años de trayectoria en la producción musical. Enfocado en los géneros techno, raw e hypnotic, su estilo combina influencias del techno hipnótico y oscuro, creando atmósferas profundas y cargadas de misterio, moviéndose entre lo crudo y lo cinematográfico.</p>
         </div>
         <div class="bio-block">
-          <p>Sus primeros lanzamientos independientes fueron en Trau-ma, el sello de Robert Hoff...</p>
+          <p>Sus primeros lanzamientos independientes fueron en Trau-ma, el sello de Robert Hoff, donde debutó con el E.P. <i>Chains</i>. Además, ha lanzado música en colaboración en <i>Anaoh</i>, el sello de Fixon y Dig-it, consolidando una presencia auténtica en el circuito under. Con una visión que explora la complejidad emocional a través del sonido, Luciano canaliza sus raíces astrológicas y su búsqueda espiritual en cada mezcla y producción, llevándolas a un nivel que busca resonar no solo en el oído, sino en la psique del oyente.</p>
         </div>
         <div class="bio-block">
-          <p>Actualmente se encuentra trabajando para lanzar su sello discográfico, <i>Viuda Negra</i>...</p>
+          <p>Actualmente se encuentra trabajando para lanzar su sello discográfico, <i>Viuda Negra</i>, reflejando su estética, fusionando la oscuridad y el misticismo en una propuesta visual y auditiva única. Como <i>Ungeliebt</i>, ha compartido su música en eventos reconocidos por su autenticidad y puesta en escena inmersiva en el under.</i>...</p>
         </div>
       </div>
     </div>
@@ -360,7 +418,7 @@
       toggle.classList.toggle('active');
     }
 
-    // Efecto de aparición al hacer scroll
+    // Aparición al hacer scroll
     const elements = document.querySelectorAll('.section, .bio-img, h2');
     window.addEventListener('scroll', () => {
       elements.forEach(el => {
@@ -370,6 +428,16 @@
           el.style.transform = 'translateY(0)';
         }
       });
+    });
+
+    // Preloader
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      setTimeout(() => {
+        preloader.style.opacity = '0';
+        preloader.style.transition = 'opacity 1s ease';
+        setTimeout(() => preloader.style.display = 'none', 800);
+      }, 1500);
     });
   </script>
 </body>
