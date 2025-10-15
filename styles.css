@@ -91,20 +91,19 @@ body::before {
    CABECERA
    ===================================================== */
 header {
-    background-color: #111;
-    padding: 20px;
-    text-align: center;
-    position: relative;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1000; /* 🔥 se asegura de estar por encima de todo */
+  backdrop-filter: blur(4px);
 }
 
-h1 {
-    font-size: 3rem;
-    letter-spacing: 6px;
-    margin: 0 0 10px 0;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    animation: flicker 6s infinite;
-    transition: all 0.3s ease;
+nav {
+  position: relative;
+  z-index: 1001; /* 🔥 el menú estará sobre el fondo */
 }
+
 
 h1:hover {
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
@@ -277,6 +276,18 @@ nav ul li a:hover::after {
 .menu-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
 }
+
+@keyframes fadeInMenu {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  nav.active ul {
+    animation: fadeInMenu 0.4s ease forwards;
+  }
+}
+
 
 /* =====================================================
    CONTENIDO
