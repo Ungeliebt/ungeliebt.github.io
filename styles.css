@@ -155,16 +155,16 @@ h1::after {
 }
 
 /* =====================================================
-   /* ---------- MENÚ ---------- */
-/* =====================================================*/
+   MENÚ PRINCIPAL (ESCRITORIO + MÓVIL)
+   ===================================================== */
 nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 20px;
-  opacity: 1; /* visible por defecto en escritorio */
+  gap: 25px;
+  opacity: 1;
   transition: opacity 0.4s ease;
 }
 
@@ -173,6 +173,23 @@ nav ul li a {
   text-transform: uppercase;
   font-weight: 400;
   letter-spacing: 1px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 1px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
 }
 
 .menu-toggle {
@@ -185,23 +202,49 @@ nav ul li a {
   z-index: 20;
 }
 
-/* ---------- VERSIÓN MÓVIL ---------- */
+.menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  margin: 5px auto;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* =====================================================
+   RESPONSIVE - VERSIÓN MÓVIL
+   ===================================================== */
 @media (max-width: 768px) {
   nav ul {
-    display: none; /* oculto por defecto */
+    display: none;
     flex-direction: column;
     align-items: center;
     background-color: #111;
     width: 100%;
     padding: 20px 0;
+    margin: 0;
   }
 
   nav.active ul {
-    display: flex; /* visible solo cuando se abre el menú */
+    display: flex;
   }
 
   .menu-toggle {
-    display: block; /* solo visible en móvil */
+    display: block;
+  }
+
+  nav ul li {
+    margin: 10px 0;
   }
 }
 
