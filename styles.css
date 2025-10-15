@@ -4,87 +4,87 @@
 
 /* ---------- FUENTE BASE ---------- */
 body {
-    font-family: 'Oswald', Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    animation: fadeIn 1.5s ease-in-out;
-    scroll-behavior: smooth;
+  font-family: 'Oswald', Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  animation: fadeIn 1.5s ease-in-out;
+  scroll-behavior: smooth;
 }
 
 /* ---------- LÍNEA LATERAL DE ENERGÍA ---------- */
 body::before {
-    content: "";
-    position: fixed;
-    left: 2%;
-    top: 0;
-    width: 1px;
-    height: 100vh;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
-    z-index: 10;
+  content: "";
+  position: fixed;
+  left: 2%;
+  top: 0;
+  width: 1px;
+  height: 100vh;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
+  z-index: 10;
 }
 
 /* ---------- FONDO GRANULADO Y ANIMADO ---------- */
 .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('background.jpg') no-repeat center center/cover;
-    opacity: 0.1;
-    z-index: -2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('background.jpg') no-repeat center center/cover;
+  opacity: 0.1;
+  z-index: -2;
 }
 
 .background::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url('grain-texture.png') repeat;
-    opacity: 0.05;
-    animation: moveGrain 10s linear infinite;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('grain-texture.png') repeat;
+  opacity: 0.05;
+  animation: moveGrain 10s linear infinite;
 }
 
 @keyframes moveGrain {
-    from { background-position: 0 0; }
-    to { background-position: 100px 100px; }
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
 }
 
 /* =====================================================
    PRELOADER
    ===================================================== */
 #preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: fadeOut 1.5s ease 1.8s forwards;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 1.5s ease 1.8s forwards;
 }
 
 .preloader-text {
-    font-size: 2.5rem;
-    letter-spacing: 10px;
-    color: white;
-    opacity: 0;
-    animation: fadeInText 1s ease forwards;
+  font-size: 2.5rem;
+  letter-spacing: 10px;
+  color: white;
+  opacity: 0;
+  animation: fadeInText 1s ease forwards;
 }
 
 @keyframes fadeInText {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes fadeOut {
-    to { opacity: 0; visibility: hidden; }
+  to { opacity: 0; visibility: hidden; }
 }
 
 /* =====================================================
@@ -95,66 +95,72 @@ header {
   padding: 20px;
   text-align: center;
   position: relative;
-  z-index: 1000; /* 🔥 se asegura de estar por encima de todo */
+  z-index: 1000;
   backdrop-filter: blur(4px);
 }
 
 nav {
   position: relative;
-  z-index: 1001; /* 🔥 el menú estará sobre el fondo */
+  z-index: 1001;
 }
 
-
-h1:hover {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
-}
 /* ---------- EFECTO GLITCH LEVE EN EL TÍTULO ---------- */
 h1 {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
+  font-size: 3rem;
+  letter-spacing: 6px;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  animation: flicker 6s infinite;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+h1:hover {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
 }
 
 h1::before,
 h1::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    color: #fff;
-    clip: rect(0, 0, 0, 0);
-    animation: glitch 3s infinite ease-in-out alternate-reverse;
-    opacity: 0.7;
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #fff;
+  clip: rect(0, 0, 0, 0);
+  animation: glitch 3s infinite ease-in-out alternate-reverse;
+  opacity: 0.7;
 }
 
 h1::before {
-    left: 2px;
-    text-shadow: -2px 0 red;
-    animation-delay: 1s;
+  left: 2px;
+  text-shadow: -2px 0 red;
+  animation-delay: 1s;
 }
 
 h1::after {
-    left: -2px;
-    text-shadow: 2px 0 blue;
-    animation-delay: 2s;
+  left: -2px;
+  text-shadow: 2px 0 blue;
+  animation-delay: 2s;
 }
 
 @keyframes glitch {
-    0% { clip: rect(10px, 9999px, 40px, 0); }
-    5% { clip: rect(60px, 9999px, 80px, 0); }
-    10% { clip: rect(30px, 9999px, 70px, 0); }
-    15% { clip: rect(80px, 9999px, 100px, 0); }
-    20%, 100% { clip: rect(0, 9999px, 0, 0); }
+  0% { clip: rect(10px, 9999px, 40px, 0); }
+  5% { clip: rect(60px, 9999px, 80px, 0); }
+  10% { clip: rect(30px, 9999px, 70px, 0); }
+  15% { clip: rect(80px, 9999px, 100px, 0); }
+  20%, 100% { clip: rect(0, 9999px, 0, 0); }
 }
 
 @keyframes flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-    20%, 24%, 55% { opacity: 0.6; }
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.6; }
 }
 
 /* =====================================================
-   MENÚ PRINCIPAL (ESCRITORIO + MÓVIL)
+   MENÚ PRINCIPAL
    ===================================================== */
 nav ul {
   list-style: none;
@@ -220,9 +226,12 @@ nav ul li a:hover::after {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* =====================================================
-   RESPONSIVE - VERSIÓN MÓVIL
-   ===================================================== */
+/* ---------- ANIMACIÓN DE APARICIÓN DEL MENÚ MÓVIL ---------- */
+@keyframes fadeInMenu {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 768px) {
   nav ul {
     display: none;
@@ -236,6 +245,7 @@ nav ul li a:hover::after {
 
   nav.active ul {
     display: flex;
+    animation: fadeInMenu 0.4s ease forwards;
   }
 
   .menu-toggle {
@@ -247,191 +257,129 @@ nav ul li a:hover::after {
   }
 }
 
-/* ---------- MENÚ HAMBURGUESA ---------- */
-.menu-toggle {
-    display: none;
-    font-size: 2rem;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 20;
-}
-
-.menu-toggle span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: #fff;
-    margin: 5px auto;
-    transition: all 0.3s ease;
-}
-
-.menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-.menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
-
-@keyframes fadeInMenu {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-  nav.active ul {
-    animation: fadeInMenu 0.4s ease forwards;
-  }
-}
-
-
 /* =====================================================
    CONTENIDO
    ===================================================== */
 .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 h2 {
-    font-size: 1.5rem;
-    margin-top: 40px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
+  font-size: 1.5rem;
+  margin-top: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 section, .section {
-    padding: 20px 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
+  padding: 20px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .bio-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .bio-text {
-    flex: 1;
-    min-width: 300px;
+  flex: 1;
+  min-width: 300px;
 }
 
 .bio-img {
-    max-width: 300px;
-    border-radius: 10px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
+  max-width: 300px;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .bio-block {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    transition: background 0.3s ease, transform 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .bio-block:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    transform: scale(1.01);
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.01);
 }
 
 iframe {
-    width: 100%;
-    height: 160px;
-    margin: 30px 0;
-    border: none;
+  width: 100%;
+  height: 160px;
+  margin: 30px 0;
+  border: none;
 }
 
 .techrider, .social {
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 10px;
 }
 
 footer {
-    background-color: transparent;
-    padding: 20px;
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.3);
+  background-color: transparent;
+  padding: 20px;
+  font-size: 0.9em;
+  color: rgba(255,255,255,0.3);
 }
 
 /* =====================================================
    ANIMACIONES GLOBALES
    ===================================================== */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* =====================================================
-   RESPONSIVE (MÓVILES)
+   RESPONSIVE
    ===================================================== */
 @media (max-width: 768px) {
-    body {
-        font-size: 0.9rem;
-        padding: 0 10px;
-    }
+  body {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
 
-    h1 {
-        font-size: 2.2rem;
-        letter-spacing: 2px;
-    }
+  h1 {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
 
-    header {
-        padding: 10px;
-    }
+  header {
+    padding: 10px;
+  }
 
-    .bio-container {
-        flex-direction: column;
-        align-items: center;
-    }
+  .bio-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .bio-img {
-        max-width: 90%;
-        margin-bottom: 20px;
-    }
+  .bio-img {
+    max-width: 90%;
+    margin-bottom: 20px;
+  }
 
-    iframe {
-        width: 100%;
-        height: 200px;
-    }
+  iframe {
+    width: 100%;
+    height: 200px;
+  }
 
-    nav ul {
-        display: none;
-        flex-direction: column;
-        background-color: #111;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        padding: 20px 0;
-        margin: 0;
-    }
+  nav ul li {
+    margin: 10px 0;
+  }
 
-    nav.active ul {
-        display: flex;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    nav ul li {
-        margin: 10px 0;
-    }
-
-    .logo {
-        width: 100px;
-    }
+  .logo {
+    width: 100px;
+  }
 }
