@@ -30,7 +30,7 @@
       z-index: 10;
     }
 
-    /* Fondo granulado */
+    /* ---------- FONDO ---------- */
     .background {
       position: fixed;
       top: 0;
@@ -40,7 +40,9 @@
       background: url('background.jpg') no-repeat center center/cover;
       opacity: 0.1;
       z-index: -2;
+      animation: backgroundGlitch 2.8s ease-in-out;
     }
+
     .background::after {
       content: "";
       position: absolute;
@@ -49,9 +51,21 @@
       opacity: 0.05;
       animation: moveGrain 10s linear infinite;
     }
+
     @keyframes moveGrain {
       from { background-position: 0 0; }
       to { background-position: 100px 100px; }
+    }
+
+    /* Glitch cinematográfico del fondo */
+    @keyframes backgroundGlitch {
+      0%   { transform: scale(1.05) skewX(2deg); opacity: 0.05; filter: brightness(130%) contrast(120%); }
+      10%  { transform: scale(1.02) skewX(-2deg); opacity: 0.1; }
+      20%  { transform: scale(1.03) skewY(1deg); opacity: 0.12; filter: brightness(120%) contrast(110%); }
+      35%  { transform: scale(1.06) skewX(1deg); opacity: 0.1; }
+      50%  { transform: scale(1.04) skewX(-1deg); opacity: 0.12; }
+      70%  { transform: scale(1.02) skewY(0deg); opacity: 0.1; filter: none; }
+      100% { transform: none; opacity: 0.1; filter: none; }
     }
 
     /* ---------- PRELOADER ---------- */
@@ -72,16 +86,18 @@
       color: white;
       font-size: 2rem;
       letter-spacing: 8px;
-      animation: glitchIntro 1.8s ease-in-out;
+      animation: glitchIntro 2.8s ease-in-out;
     }
 
+    /* Glitch sincronizado con el fondo */
     @keyframes glitchIntro {
-      0% { opacity: 0; transform: scale(1.1); text-shadow: 2px 0 red, -2px 0 blue; }
-      15% { opacity: 1; transform: scale(1.03); text-shadow: -2px 0 red, 2px 0 blue; }
-      35% { text-shadow: 3px 0 red, -3px 0 blue; }
-      55% { transform: scale(1.08); text-shadow: -2px 0 red, 2px 0 blue; }
-      75% { opacity: 1; transform: scale(1); text-shadow: none; }
-      100% { opacity: 0; }
+      0%   { opacity: 0; transform: scale(1.1); text-shadow: 2px 0 red, -2px 0 blue; }
+      10%  { opacity: 1; transform: scale(1.05); text-shadow: -2px 0 red, 2px 0 blue; }
+      25%  { text-shadow: 3px 0 red, -3px 0 blue; }
+      45%  { transform: scale(1.08); text-shadow: -2px 0 red, 2px 0 blue; }
+      65%  { opacity: 1; transform: scale(1.02); text-shadow: none; }
+      85%  { opacity: 1; filter: brightness(120%); }
+      100% { opacity: 0; transform: scale(1); filter: none; }
     }
 
     /* ---------- GLITCH + TITULO ---------- */
@@ -108,28 +124,27 @@
     h1::before {
       left: 2px;
       text-shadow: -2px 0 red;
-      animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+      animation: glitch-anim-1 2.8s ease-in-out;
     }
 
     h1::after {
       left: -2px;
       text-shadow: -2px 0 blue;
-      animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+      animation: glitch-anim-2 2.8s ease-in-out;
     }
 
     @keyframes glitch-anim-1 {
-      0% { clip: rect(42px, 9999px, 44px, 0); }
-      10% { clip: rect(12px, 9999px, 30px, 0); }
-      20% { clip: rect(52px, 9999px, 80px, 0); }
-      30% { clip: rect(32px, 9999px, 60px, 0); }
-      40%, 100% { clip: rect(0, 9999px, 0, 0); }
+      0%, 10% { clip: rect(42px, 9999px, 44px, 0); }
+      15%, 35% { clip: rect(12px, 9999px, 30px, 0); }
+      40%, 60% { clip: rect(52px, 9999px, 80px, 0); }
+      70%, 100% { clip: rect(0, 9999px, 0, 0); }
     }
 
     @keyframes glitch-anim-2 {
-      0% { clip: rect(12px, 9999px, 60px, 0); }
-      10% { clip: rect(52px, 9999px, 80px, 0); }
-      20% { clip: rect(32px, 9999px, 44px, 0); }
-      30%, 100% { clip: rect(0, 9999px, 0, 0); }
+      0%, 10% { clip: rect(12px, 9999px, 60px, 0); }
+      15%, 35% { clip: rect(52px, 9999px, 80px, 0); }
+      40%, 60% { clip: rect(32px, 9999px, 44px, 0); }
+      70%, 100% { clip: rect(0, 9999px, 0, 0); }
     }
 
     @keyframes flicker {
@@ -377,6 +392,7 @@
       </div>
     </div>
 
+
     <div class="section" id="musica">
       <h2>EP - Profundo y Silencioso</h2>
       <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
@@ -402,8 +418,8 @@
     <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
       src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ungeliebt/ungeliebt-podcast&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
     </iframe>
-
-    <div class="section techrider" id="techrider">
+    
+  <div class="section techrider" id="techrider">
       <h2>Tech Rider</h2>
       <ul>
         <li>Cabina estable, preferentemente aislada de vibraciones externas.</li>
@@ -412,7 +428,7 @@
       </ul>
     </div>
 
-
+   
      <div class="section social" id="contacto">
       <h2>Redes Sociales & Contacto</h2>
       <ul>
@@ -429,7 +445,6 @@
   </div>
 
   <script>
-    // Menú hamburguesa
     function toggleMenu() {
       const nav = document.getElementById('main-nav');
       const toggle = document.getElementById('menu-toggle');
@@ -437,7 +452,6 @@
       toggle.classList.toggle('active');
     }
 
-    // Aparición al hacer scroll
     const elements = document.querySelectorAll('.section, .bio-img, h2');
     window.addEventListener('scroll', () => {
       elements.forEach(el => {
@@ -456,7 +470,7 @@
         preloader.style.opacity = '0';
         preloader.style.transition = 'opacity 1s ease';
         setTimeout(() => preloader.style.display = 'none', 800);
-      }, 1500);
+      }, 2500); // se extendió para que coincida con el glitch
     });
   </script>
 </body>
