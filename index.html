@@ -23,17 +23,15 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Fondo */
 .background {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: url('background.jpg') no-repeat center center/cover;
   opacity: 0.1;
   z-index: -2;
 }
-
 .background::after {
   content: "";
   position: absolute;
@@ -42,35 +40,33 @@ body {
   opacity: 0.05;
   animation: moveGrain 10s linear infinite;
 }
-
 @keyframes moveGrain {
   from { background-position: 0 0; }
   to { background-position: 100px 100px; }
 }
 
 /* =====================================================
-   INTRO Y TRANSICIÓN
+   INTRO GLITCH CINEMÁTICO
 ===================================================== */
 .glitch-screen {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #000;
   z-index: 9999;
-  animation: fadeOutIntro 1s ease 2.8s forwards;
+  animation: fadeOut 1s ease 2s forwards;
 }
 
 .glitch-text {
   font-size: 3rem;
   letter-spacing: 8px;
   text-transform: uppercase;
+  color: white;
   position: relative;
   opacity: 0;
-  animation: appearText 3s ease forwards, glitchIntro 2s infinite alternate-reverse;
+  animation: cinematicGlitch 3s ease forwards;
 }
 
 .glitch-text::before,
@@ -79,48 +75,34 @@ body {
   position: absolute;
   left: 0;
   width: 100%;
-  color: #fff;
   opacity: 0.7;
-  clip: rect(0, 0, 0, 0);
-  animation: glitchMove 3s infinite ease-in-out;
+  color: white;
+  clip-path: inset(0 0 0 0);
+  animation: glitchShift 1.5s infinite linear alternate;
 }
 
 .glitch-text::before {
-  left: 2px;
   text-shadow: -2px 0 red;
-  animation-delay: 0.8s;
 }
-
 .glitch-text::after {
-  left: -2px;
   text-shadow: 2px 0 blue;
-  animation-delay: 1.2s;
 }
 
-@keyframes glitchIntro {
-  0% { transform: none; }
-  20% { transform: skew(1deg, 1deg); }
-  40% { transform: skew(-1deg, -1deg); }
-  60% { transform: none; }
-  80% { transform: skew(0.5deg, -0.5deg); }
-  100% { transform: none; }
+@keyframes cinematicGlitch {
+  0% { opacity: 0; transform: scale(0.8); filter: blur(6px); }
+  25% { opacity: 1; transform: scale(1.05); filter: blur(0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; filter: blur(6px); }
 }
 
-@keyframes glitchMove {
-  0% { clip: rect(10px, 9999px, 40px, 0); }
-  20% { clip: rect(60px, 9999px, 80px, 0); }
-  40% { clip: rect(30px, 9999px, 70px, 0); }
-  60% { clip: rect(80px, 9999px, 100px, 0); }
-  80%, 100% { clip: rect(0, 9999px, 0, 0); }
+@keyframes glitchShift {
+  0%, 100% { clip-path: inset(0 0 0 0); }
+  25% { clip-path: inset(10% 0 15% 0); }
+  50% { clip-path: inset(40% 0 20% 0); }
+  75% { clip-path: inset(15% 0 10% 0); }
 }
 
-@keyframes appearText {
-  0% { opacity: 0; transform: scale(0.8); filter: blur(4px); }
-  40% { opacity: 1; transform: scale(1.05); filter: blur(0); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes fadeOutIntro {
+@keyframes fadeOut {
   to { opacity: 0; visibility: hidden; }
 }
 
@@ -129,8 +111,7 @@ body {
 ===================================================== */
 .landing {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,7 +121,6 @@ body {
   transition: opacity 1s ease;
   z-index: 998;
 }
-
 .landing.visible {
   opacity: 1;
   pointer-events: all;
@@ -160,18 +140,14 @@ body {
   position: relative;
   overflow: hidden;
 }
-
 .option::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: 0.5s;
 }
-
 .option:hover::before { left: 100%; }
 .option:hover { color: #ff3333; border-color: #ff3333; }
 
@@ -183,13 +159,11 @@ body {
   display: none;
   transition: opacity 1.5s ease;
 }
-
 .main-content.visible {
   display: block;
   opacity: 1;
   animation: fadeIn 1.5s ease;
 }
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -207,26 +181,19 @@ h1 {
   letter-spacing: 5px;
   margin-bottom: 40px;
   text-transform: uppercase;
-  animation: glitchIntro 2s infinite alternate-reverse;
 }
 
+/* =====================================================
+   BIOGRAFÍA Y MÚSICA
+===================================================== */
 .bio-container {
   display: flex;
   align-items: flex-start;
   gap: 30px;
   flex-wrap: wrap;
 }
-
-.bio-text {
-  flex: 1;
-  min-width: 300px;
-}
-
-.bio-img {
-  max-width: 300px;
-  border-radius: 10px;
-  order: -1; /* imagen a la izquierda */
-}
+.bio-text { flex: 1; min-width: 300px; }
+.bio-img { max-width: 300px; border-radius: 10px; order: -1; }
 
 .bio-block {
   background-color: rgba(255, 255, 255, 0.1);
@@ -235,39 +202,35 @@ h1 {
   margin-bottom: 15px;
   transition: background 0.3s ease, transform 0.3s ease;
 }
-
 .bio-block:hover {
   background-color: rgba(255, 255, 255, 0.15);
   transform: scale(1.01);
 }
 
-iframe {
-  width: 100%;
-  height: 160px;
-  margin: 30px 0;
-  border: none;
+/* Enlaces de lanzamientos */
+.enlaces {
+  text-align: left;
+  margin-top: 30px;
 }
-
-a.link-block {
-  display: inline-block;
-  background: rgba(255,255,255,0.1);
-  padding: 8px 14px;
-  border-radius: 6px;
-  margin: 6px 4px;
-  color: white;
+.enlaces h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.enlaces ul {
+  list-style-type: disc;
+  padding-left: 30px;
+}
+.enlaces ul li {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+.enlaces ul li a {
+  color: #fff;
   text-decoration: none;
-  transition: background 0.3s ease;
+  transition: color 0.3s ease;
 }
-
-a.link-block:hover {
-  background: rgba(255,255,255,0.2);
-}
-
-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.3);
-  margin-top: 80px;
+.enlaces ul li a:hover {
+  color: #ff3333;
 }
 
 /* =====================================================
@@ -282,17 +245,14 @@ header {
   z-index: 1000;
   padding: 15px 10px;
 }
-
 .menu-toggle {
   display: none;
   font-size: 2rem;
   cursor: pointer;
   position: absolute;
-  right: 20px;
-  top: 15px;
+  right: 20px; top: 15px;
   z-index: 1100;
 }
-
 .menu-toggle span {
   display: block;
   width: 25px;
@@ -301,14 +261,9 @@ header {
   margin: 5px auto;
   transition: all 0.3s ease;
 }
-
-.menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .menu-toggle.active span:nth-child(2) { opacity: 0; }
-.menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 nav ul {
   list-style: none;
@@ -318,11 +273,8 @@ nav ul {
   gap: 25px;
   transition: 0.4s ease;
 }
-
-/* ===== Menú lateral móvil ===== */
 @media (max-width: 768px) {
   nav ul {
-    display: flex;
     flex-direction: column;
     align-items: flex-end;
     position: fixed;
@@ -336,22 +288,10 @@ nav ul {
     gap: 20px;
     transition: right 0.4s ease;
   }
-
-  nav.active ul {
-    right: 0;
-  }
-
+  nav.active ul { right: 0; }
   .menu-toggle { display: block; }
-
-  .bio-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .bio-img {
-    order: 0;
-    max-width: 90%;
-  }
+  .bio-container { flex-direction: column; align-items: center; }
+  .bio-img { order: 0; max-width: 90%; }
 }
 </style>
 </head>
@@ -378,9 +318,7 @@ nav ul {
 <!-- ===== PRESSKIT ===== -->
 <div class="main-content" id="presskitContent">
   <header>
-    <div class="menu-toggle" id="menuToggle">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
     <nav id="mainNav">
       <ul>
         <li><a href="#bio">Biografía</a></li>
@@ -413,15 +351,21 @@ nav ul {
     <h2 id="musica">Últimos lanzamientos</h2>
     <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/occultus_records/sets/profundo-y-silencioso-ep"></iframe>
 
-    <a href="https://soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep" class="link-block">Profundo y Silencioso - EP</a>
-    <a href="https://soundcloud.com/trauma-records/sets/ungeliebt-chains" class="link-block">Chains - EP</a>
-    <a href="https://soundcloud.com/anaohltd/sets/promise-land" class="link-block">Promise Land</a>
-    <a href="https://soundcloud.com/anaohltd/sets/redemption" class="link-block">Redemption</a>
+    <div class="enlaces">
+      <h2>Enlaces a lanzamientos</h2>
+      <ul>
+        <li><a href="https://soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep">Profundo y Silencioso - EP</a></li>
+        <li><a href="https://soundcloud.com/trauma-records/sets/ungeliebt-chains">Chains - EP</a></li>
+        <li><a href="https://soundcloud.com/anaohltd/sets/promise-land">Promise Land</a></li>
+        <li><a href="https://soundcloud.com/anaohltd/sets/redemption">Redemption</a></li>
+      </ul>
+    </div>
 
     <h2>DJ Sets</h2>
-    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/praxisbcn/praxis-series-012-ungeliebt&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
-    </iframe>
+    <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/praxisbcn/praxis-series-012-ungeliebt"></iframe>
+     
+    <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ungeliebt/ungeliebt-podcast&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+     
 
     <h2 id="tech">Tech Rider</h2>
     <ul>
@@ -463,7 +407,7 @@ window.addEventListener('load', () => {
   }, 3000);
 });
 
-// Transición
+// Transición entre secciones
 const landing = document.getElementById('landing');
 const transition = document.getElementById('transition');
 const presskit = document.getElementById('presskitContent');
@@ -471,9 +415,7 @@ const historia = document.getElementById('historiaContent');
 
 function showTransition(callback) {
   transition.style.display = 'flex';
-  setTimeout(() => {
-    transition.style.animation = 'fadeOutIntro 1s ease 2.8s forwards';
-  }, 100);
+  setTimeout(() => { transition.style.animation = 'fadeOut 1s ease 2s forwards'; }, 100);
   setTimeout(() => {
     transition.style.display = 'none';
     callback();
