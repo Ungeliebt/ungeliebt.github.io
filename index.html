@@ -5,7 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ungeliebt</title>
 
+<!-- Fonts preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+
+<!-- SEO & Open Graph -->
+<meta name="description" content="Ungeliebt — productor y DJ de techno hipnótico y oscuro de Buenos Aires.">
+<meta property="og:title" content="Ungeliebt">
+<meta property="og:description" content="Productor y DJ de techno hipnótico y oscuro.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="background.jpg">
+<meta name="theme-color" content="#000000">
 
 <style>
 /* =====================================================
@@ -233,6 +244,30 @@ h1 {
   color: #ff3333;
 }
 
+/* Enlaces estilo botón y botón Volver */
+.link-block {
+  display: inline-block;
+  margin: 8px 12px 0 0;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  transition: all .3s;
+}
+.link-block:hover { border-color:#ff3333; color:#ff3333; }
+
+.volver {
+  margin-top: 30px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  transition: all .3s;
+}
+.volver:hover { border-color:#ff3333; color:#ff3333; }
+
 /* =====================================================
    MENÚ HAMBURGUESA
 ===================================================== */
@@ -302,6 +337,14 @@ nav ul li a:hover {
   .bio-container { flex-direction: column; align-items: center; }
   .bio-img { order: 0; max-width: 90%; }
 }
+
+/* Compensar header sticky al navegar a anclas */
+:target { scroll-margin-top: 90px; }
+
+/* Respeto a usuarios con motion reducido */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto; }
+}
 </style>
 </head>
 
@@ -327,7 +370,7 @@ nav ul li a:hover {
 <!-- ===== PRESSKIT ===== -->
 <div class="main-content" id="presskitContent">
   <header>
-    <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    <div class="menu-toggle" id="menuToggle" role="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav"><span></span><span></span><span></span></div>
     <nav id="mainNav">
       <ul>
         <li><a href="#bio">Biografía</a></li>
@@ -343,7 +386,7 @@ nav ul li a:hover {
 
     <h2 id="bio">Biografía</h2>
     <div class="bio-container">
-      <img src="foto 1.jpg" alt="Ungeliebt" class="bio-img">
+      <img src="foto 1.jpg" alt="Retrato de Ungeliebt" class="bio-img" loading="lazy" decoding="async">
       <div class="bio-text">
         <div class="bio-block">
           <p>Luciano Aguirre, mejor conocido como Ungeliebt, es un productor y DJ de música electrónica oriundo de Buenos Aires, Argentina, con más de seis años de trayectoria en la producción musical. Enfocado en los géneros techno, raw e hypnotic, su estilo combina influencias del techno hipnótico y oscuro, creando atmósferas profundas y cargadas de misterio, moviéndose entre lo crudo y lo cinematográfico.</p>
@@ -358,26 +401,26 @@ nav ul li a:hover {
     </div>
 
     <h2 id="musica">Últimos lanzamientos</h2>
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+    <iframe title="EP Profundo y Silencioso" loading="lazy" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
       src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/occultus_records/sets/profundo-y-silencioso-ep&color=%23000000&auto_play=false">
     </iframe>
 
     <div class="enlaces">
       <h2>Enlaces a lanzamientos</h2>
       <ul>
-        <li><a href="https://soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep">Profundo y Silencioso - EP</a></li>
-        <li><a href="https://soundcloud.com/trauma-records/sets/ungeliebt-chains">Chains - EP</a></li>
-        <li><a href="https://soundcloud.com/anaohltd/sets/promise-land">Promise Land</a></li>
-        <li><a href="https://soundcloud.com/anaohltd/sets/redemption">Redemption</a></li>
+        <li><a href="https://soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep" target="_blank" rel="noopener noreferrer">Profundo y Silencioso - EP</a></li>
+        <li><a href="https://soundcloud.com/trauma-records/sets/ungeliebt-chains" target="_blank" rel="noopener noreferrer">Chains - EP</a></li>
+        <li><a href="https://soundcloud.com/anaohltd/sets/promise-land" target="_blank" rel="noopener noreferrer">Promise Land</a></li>
+        <li><a href="https://soundcloud.com/anaohltd/sets/redemption" target="_blank" rel="noopener noreferrer">Redemption</a></li>
       </ul>
     </div>
 
     <h2>DJ Sets y Podcast</h2>
-     <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+     <iframe title="Praxis Series 012 — Ungeliebt" loading="lazy" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
       src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/praxisbcn/praxis-series-012-ungeliebt&color=%23000000">
     </iframe>
 
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+    <iframe title="Ungeliebt Podcast" loading="lazy" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
       src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ungeliebt/ungeliebt-podcast&color=%23000000">
     </iframe>
 
@@ -389,10 +432,10 @@ nav ul li a:hover {
     </ul>
 
     <h2 id="contacto">Contacto</h2>
-    <a href="https://www.instagram.com/ungeliebt_art" class="link-block">Instagram</a>
-    <a href="https://soundcloud.com/ungeliebt" class="link-block">SoundCloud</a>
-    <a href="https://ungeliebt.bandcamp.com" class="link-block">Bandcamp</a>
-    <a href="https://es.ra.co/dj/ungeliebt" class="link-block">Resident Advisor</a>
+    <a href="https://www.instagram.com/ungeliebt_art" class="link-block" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://soundcloud.com/ungeliebt" class="link-block" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+    <a href="https://ungeliebt.bandcamp.com" class="link-block" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+    <a href="https://es.ra.co/dj/ungeliebt" class="link-block" target="_blank" rel="noopener noreferrer">Resident Advisor</a>
     <a href="mailto:ungeliebt.ofc@gmail.com" class="link-block">Email</a>
 
     <div class="volver" onclick="volverInicio()">Volver</div>
@@ -456,9 +499,31 @@ function volverInicio() {
 // Menú hamburguesa
 const menuToggle = document.getElementById('menuToggle');
 const mainNav = document.getElementById('mainNav');
+
+function closeMenu() {
+  mainNav.classList.remove('active');
+  menuToggle.classList.remove('active');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
 menuToggle.addEventListener('click', () => {
-  mainNav.classList.toggle('active');
-  menuToggle.classList.toggle('active');
+  const open = mainNav.classList.toggle('active');
+  menuToggle.classList.toggle('active', open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+mainNav.addEventListener('click', (e) => {
+  if (e.target.tagName === 'A') {
+    closeMenu();
+  }
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeMenu();
+  }
 });
 </script>
 </body>
