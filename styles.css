@@ -7,7 +7,6 @@ body {
   font-family: 'Oswald', Arial, sans-serif;
   background-color: #000;
   color: #fff;
-  text-align: center;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -382,4 +381,18 @@ footer {
   .logo {
     width: 100px;
   }
+}
+
+#logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6rem;
+  letter-spacing: 0.5rem;
+  color: #fff;
+  text-transform: uppercase;
+  z-index: 1000;
+  text-align: center;
+  transition: all 0.4s ease;
 }
