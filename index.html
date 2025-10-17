@@ -180,6 +180,17 @@ body {
   opacity: 1;
   animation: fadeIn 1.5s ease;
 }
+/* Asegurar que el contenido interno sea visible cuando la sección principal esté activa */
+.main-content.visible section,
+.main-content.visible .section {
+  opacity: 1;
+  transform: translateY(0);
+}
+.main-content.visible h2,
+.main-content.visible .bio-img {
+  opacity: 1;
+  transform: translateY(0);
+}
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -485,12 +496,23 @@ nav ul li a:hover {
 <footer id="siteFooter" class="site-footer hidden">© 2025 Ungeliebt | Viuda Negra</footer>
 
 <script>
-// Intro inicial
+// Intro inicial (robusto: por fin de animación + fallback)
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('intro').style.display = 'none';
-    document.getElementById('landing').classList.add('visible');
-  }, 3000);
+  const intro = document.getElementById('intro');
+  const landingEl = document.getElementById('landing');
+  let introHidden = false;
+
+  function hideIntro() {
+    if (introHidden) return;
+    introHidden = true;
+    intro.style.display = 'none';
+    landingEl.classList.add('visible');
+  }
+
+  // Ocultar al terminar la animación CSS del contenedor
+  intro.addEventListener('animationend', hideIntro, { once: true });
+  // Fallback por si el evento no dispara (navegadores/motion reduce)
+  setTimeout(hideIntro, 3200);
 });
 
 // Transición entre secciones
