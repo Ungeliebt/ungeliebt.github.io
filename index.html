@@ -172,6 +172,8 @@ body {
   opacity: 0;
   display: none;
   transition: opacity 1.5s ease;
+  /* Asegura espacio para no tapar el contenido con el footer fijo */
+  padding-bottom: 120px;
 }
 .main-content.visible {
   display: block;
@@ -270,6 +272,33 @@ h1 {
   transition: all .3s;
 }
 .volver:hover { border-color:#ff3333; color:#ff3333; }
+
+/* Botón Volver flotante en esquina inferior */
+.volver-floating {
+  position: fixed;
+  right: 24px;
+  bottom: 84px; /* separado del footer fijo */
+  z-index: 1001;
+}
+
+/* Footer fijo inferior, centrado y elegante */
+.site-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  background: rgba(10, 10, 10, 0.92);
+  color: rgba(255, 255, 255, 0.65);
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1000;
+}
+
+/* Utilidad para mostrar/ocultar */
+.hidden { display: none !important; }
 
 /* =====================================================
    MENÚ HAMBURGUESA
@@ -440,9 +469,6 @@ nav ul li a:hover {
     <a href="https://ungeliebt.bandcamp.com" class="link-block" target="_blank" rel="noopener noreferrer">Bandcamp</a>
     <a href="https://es.ra.co/dj/ungeliebt" class="link-block" target="_blank" rel="noopener noreferrer">Resident Advisor</a>
     <a href="mailto:ungeliebt.ofc@gmail.com" class="link-block">Email</a>
-
-    <div class="volver" onclick="volverInicio()">Volver</div>
-    <footer>© 2025 Ungeliebt | Viuda Negra</footer>
   </section>
 </div>
 
@@ -451,10 +477,12 @@ nav ul li a:hover {
   <section>
     <h1>Historia de Ungeliebt</h1>
     <p>Antes del sonido, existía el vacío...</p>
-    <div class="volver" onclick="volverInicio()">Volver</div>
-    <footer>© 2025 Ungeliebt | Viuda Negra</footer>
   </section>
 </div>
+
+<!-- Elementos globales: botón volver flotante y footer fijo -->
+<div id="volverFloating" class="volver volver-floating hidden" onclick="volverInicio()">Volver</div>
+<footer id="siteFooter" class="site-footer hidden">© 2025 Ungeliebt | Viuda Negra</footer>
 
 <script>
 // Intro inicial
@@ -470,6 +498,13 @@ const landing = document.getElementById('landing');
 const transition = document.getElementById('transition');
 const presskit = document.getElementById('presskitContent');
 const historia = document.getElementById('historiaContent');
+const volverFloating = document.getElementById('volverFloating');
+const siteFooter = document.getElementById('siteFooter');
+
+function setContentUIVisible(visible) {
+  volverFloating.classList.toggle('hidden', !visible);
+  siteFooter.classList.toggle('hidden', !visible);
+}
 
 function showTransition(callback) {
   transition.style.display = 'flex';
@@ -482,12 +517,12 @@ function showTransition(callback) {
 
 document.getElementById('btnPresskit').addEventListener('click', () => {
   landing.classList.remove('visible');
-  showTransition(() => presskit.classList.add('visible'));
+  showTransition(() => { presskit.classList.add('visible'); setContentUIVisible(true); });
 });
 
 document.getElementById('btnHistoria').addEventListener('click', () => {
   landing.classList.remove('visible');
-  showTransition(() => historia.classList.add('visible'));
+  showTransition(() => { historia.classList.add('visible'); setContentUIVisible(true); });
 });
 
 function volverInicio() {
@@ -497,6 +532,7 @@ function volverInicio() {
     landing.style.display = 'flex';
     setTimeout(() => landing.classList.add('visible'), 50);
   }, 500);
+  setContentUIVisible(false);
 }
 
 // Menú hamburguesa
