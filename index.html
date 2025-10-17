@@ -27,6 +27,15 @@
 ===================================================== */
 * { box-sizing: border-box; }
 
+<script>
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  setTimeout(() => {
+    preloader.classList.add("fade-out");
+  }, 300); // pequeño delay para evitar parpadeos
+});
+</script>
+
 body {
   margin: 0;
   padding: 0;
