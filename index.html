@@ -185,6 +185,15 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Forzar visibilidad del contenido cuando la sección está activa,
+   anulando reglas de styles.css que ponen opacity:0 en section/h2/img */
+.main-content.visible section,
+.main-content.visible h2,
+.main-content.visible .bio-img {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 section {
   max-width: 900px;
   margin: 100px auto;
