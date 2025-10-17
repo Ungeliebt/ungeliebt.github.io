@@ -65,9 +65,13 @@ body {
 .glitch-screen {
   position: fixed;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* Centrado robusto en todos los dispositivos */
+  display: grid;
+  place-items: center;
+  text-align: center;
+  /* Respetar zonas seguras en móviles (notch) */
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
+           env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
   background: #000;
   z-index: 9999;
   animation: fadeOut 1s ease 2s forwards;
@@ -79,6 +83,10 @@ body {
   text-transform: uppercase;
   color: white;
   position: relative;
+  /* Evitar cortes/contracciones visuales al inicio */
+  white-space: nowrap;
+  line-height: 1.1;
+  will-change: transform, filter;
   opacity: 0;
   animation: cinematicGlitch 3s ease forwards;
 }
@@ -467,12 +475,14 @@ nav ul li a:hover {
       src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ungeliebt/ungeliebt-podcast&color=%23000000">
     </iframe>
 
-    <h2 id="tech">Tech Rider</h2>
-    <ul>
-      <li>Cabina estable, preferentemente aislada.</li>
-      <li>3x CDJ 2000NXS2 o superior, 1x DJM 900NXS2 o Xone 96.</li>
-      <li>1x monitor de retorno a la altura del oído.</li>
-    </ul>
+    <div class="enlaces techrider">
+      <h2 id="tech">Tech Rider</h2>
+      <ul>
+        <li>Cabina estable, preferentemente aislada.</li>
+        <li>3x CDJ 2000NXS2 o superior, 1x DJM 900NXS2 o Xone 96.</li>
+        <li>1x monitor de retorno a la altura del oído.</li>
+      </ul>
+    </div>
 
     <h2 id="contacto">Contacto</h2>
     <a href="https://www.instagram.com/ungeliebt_art" class="link-block" target="_blank" rel="noopener noreferrer">Instagram</a>
