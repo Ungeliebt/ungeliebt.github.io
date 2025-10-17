@@ -4,129 +4,327 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ungeliebt</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
+/* =====================================================
+   ESTILO GLOBAL
+===================================================== */
 * { box-sizing: border-box; }
+
 body {
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
   font-family: 'Oswald', sans-serif;
-  background: #000; color: #fff;
-  overflow-x: hidden; scroll-behavior: smooth;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
+
+/* Fondo */
 .background {
-  position: fixed; inset: 0;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: url('background.jpg') no-repeat center center/cover;
-  opacity: 0.1; z-index: -2;
+  opacity: 0.1;
+  z-index: -2;
 }
 .background::after {
-  content: ""; position: absolute; inset: 0;
+  content: "";
+  position: absolute;
+  inset: 0;
   background: url('grain-texture.png') repeat;
-  opacity: 0.05; animation: moveGrain 10s linear infinite;
+  opacity: 0.05;
+  animation: moveGrain 10s linear infinite;
 }
-@keyframes moveGrain { from {background-position: 0 0;} to {background-position: 100px 100px;} }
+@keyframes moveGrain {
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
+}
 
-/* Glitch cinematográfico */
+/* =====================================================
+   INTRO GLITCH CINEMÁTICO (3 SEGUNDOS)
+===================================================== */
 .glitch-screen {
-  position: fixed; inset: 0; display: flex;
-  align-items: center; justify-content: center;
-  background: #000; z-index: 9999;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  z-index: 9999;
   animation: fadeOut 1s ease 2s forwards;
 }
+
 .glitch-text {
-  font-size: 3rem; letter-spacing: 8px; text-transform: uppercase;
-  color: white; position: relative; opacity: 0;
+  font-size: 3rem;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: white;
+  position: relative;
+  opacity: 0;
   animation: cinematicGlitch 3s ease forwards;
 }
-.glitch-text::before, .glitch-text::after {
-  content: attr(data-text); position: absolute; left: 0; width: 100%; opacity: 0.7; color: white;
-  clip-path: inset(0 0 0 0); animation: glitchShift 1.5s infinite linear alternate;
-}
-.glitch-text::before { text-shadow: -2px 0 red; }
-.glitch-text::after { text-shadow: 2px 0 blue; }
-@keyframes cinematicGlitch {
-  0% {opacity:0; transform:scale(0.8); filter:blur(6px);} 25%{opacity:1; transform:scale(1.05); filter:blur(0);} 50%{opacity:1;} 100%{opacity:0; filter:blur(6px);}
-}
-@keyframes glitchShift {
-  0%,100%{clip-path:inset(0 0 0 0);} 25%{clip-path:inset(10% 0 15% 0);} 50%{clip-path:inset(40% 0 20% 0);} 75%{clip-path:inset(15% 0 10% 0);}
-}
-@keyframes fadeOut {to{opacity:0; visibility:hidden;}}
 
-/* Landing principal */
-.landing {
-  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
-  background: #000; opacity: 0; pointer-events: none; transition: opacity 1s ease; z-index: 998;
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0.7;
+  color: white;
+  clip-path: inset(0 0 0 0);
+  animation: glitchShift 1.5s infinite linear alternate;
 }
-.landing.visible { opacity: 1; pointer-events: all; }
+
+.glitch-text::before {
+  text-shadow: -2px 0 red;
+}
+.glitch-text::after {
+  text-shadow: 2px 0 blue;
+}
+
+@keyframes cinematicGlitch {
+  0% { opacity: 0; transform: scale(0.8); filter: blur(6px); }
+  25% { opacity: 1; transform: scale(1.05); filter: blur(0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; filter: blur(6px); }
+}
+
+@keyframes glitchShift {
+  0%, 100% { clip-path: inset(0 0 0 0); }
+  25% { clip-path: inset(10% 0 15% 0); }
+  50% { clip-path: inset(40% 0 20% 0); }
+  75% { clip-path: inset(15% 0 10% 0); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* =====================================================
+   LANDING PRINCIPAL
+===================================================== */
+.landing {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  z-index: 998;
+}
+.landing.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
 .option {
-  flex: 1; margin: 20px; padding: 60px 20px;
-  border: 2px solid rgba(255,255,255,0.4); text-align: center;
-  text-transform: uppercase; letter-spacing: 4px; font-size: 1.5rem; cursor: pointer;
-  transition: all 0.4s ease; position: relative; overflow: hidden;
+  flex: 1;
+  margin: 20px;
+  padding: 60px 20px;
+  border: 2px solid rgba(255,255,255,0.4);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 .option::before {
-  content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: 0.5s;
 }
 .option:hover::before { left: 100%; }
 .option:hover { color: #ff3333; border-color: #ff3333; }
 
-.main-content { opacity: 0; display: none; transition: opacity 1.5s ease; }
-.main-content.visible { display: block; opacity: 1; animation: fadeIn 1.5s ease; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+/* =====================================================
+   CONTENIDO PRINCIPAL
+===================================================== */
+.main-content {
+  opacity: 0;
+  display: none;
+  transition: opacity 1.5s ease;
+}
+.main-content.visible {
+  display: block;
+  opacity: 1;
+  animation: fadeIn 1.5s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-section { max-width: 900px; margin: 100px auto; padding: 0 20px; }
-h1 { text-align: center; font-size: 2.8rem; letter-spacing: 5px; margin-bottom: 40px; text-transform: uppercase; }
+section {
+  max-width: 900px;
+  margin: 100px auto;
+  padding: 0 20px;
+}
 
-.bio-container { display: flex; align-items: flex-start; gap: 30px; flex-wrap: wrap; }
+h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  letter-spacing: 5px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   BIOGRAFÍA Y MÚSICA
+===================================================== */
+.bio-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
+}
 .bio-text { flex: 1; min-width: 300px; }
 .bio-img { max-width: 300px; border-radius: 10px; order: -1; }
-.bio-block { background-color: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px; transition: background 0.3s ease, transform 0.3s ease; }
-.bio-block:hover { background-color: rgba(255,255,255,0.15); transform: scale(1.01); }
 
-.enlaces { text-align: left; margin-top: 30px; }
-.enlaces h2 { font-size: 1.5rem; margin-bottom: 10px; }
-.enlaces ul { list-style-type: disc; padding-left: 30px; }
-.enlaces ul li { margin-bottom: 10px; font-size: 1.1rem; }
-.enlaces ul li a { color: #fff; text-decoration: none; transition: color 0.3s ease; }
-.enlaces ul li a:hover { color: #ff3333; }
-
-header {
-  text-align: center; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(6px);
-  position: sticky; top: 0; z-index: 1000; padding: 15px 10px;
+.bio-block {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
-.menu-toggle { display: none; font-size: 2rem; cursor: pointer; position: absolute; right: 20px; top: 15px; z-index: 1100; }
-.menu-toggle span { display: block; width: 25px; height: 3px; background: #fff; margin: 5px auto; transition: all 0.3s ease; }
+.bio-block:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.01);
+}
+
+/* Enlaces de lanzamientos */
+.enlaces {
+  text-align: left;
+  margin-top: 30px;
+}
+.enlaces h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.enlaces ul {
+  list-style-type: disc;
+  padding-left: 30px;
+}
+.enlaces ul li {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+.enlaces ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.enlaces ul li a:hover {
+  color: #ff3333;
+}
+
+/* =====================================================
+   MENÚ HAMBURGUESA
+===================================================== */
+header {
+  text-align: center;
+  background-color: rgba(0,0,0,0.8);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 10px;
+}
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  right: 20px; top: 15px;
+  z-index: 1100;
+}
+.menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  margin: 5px auto;
+  transition: all 0.3s ease;
+}
 .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .menu-toggle.active span:nth-child(2) { opacity: 0; }
 .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-nav ul { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 25px; transition: 0.4s ease; }
-nav ul li a { color: #fff; text-decoration: none; transition: color 0.3s ease; }
-nav ul li a:hover { color: #ff3333; }
 
+nav ul {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  transition: 0.4s ease;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+nav ul li a:hover {
+  color: #ff3333;
+}
 @media (max-width: 768px) {
-  nav ul { flex-direction: column; align-items: flex-start; position: fixed; right: -100%; top: 0; height: 100%; width: 70%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); padding: 80px 20px; gap: 20px; transition: right 0.4s ease; }
+  nav ul {
+    flex-direction: column;
+    align-items: flex-end;
+    position: fixed;
+    right: -100%;
+    top: 0;
+    height: 100%;
+    width: 60%;
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(6px);
+    padding-top: 80px;
+    gap: 20px;
+    transition: right 0.4s ease;
+  }
   nav.active ul { right: 0; }
   .menu-toggle { display: block; }
   .bio-container { flex-direction: column; align-items: center; }
   .bio-img { order: 0; max-width: 90%; }
 }
-
-.link-block { display: inline-block; margin: 5px 10px 5px 0; padding: 5px 10px; background: rgba(255,255,255,0.1); color: white; border-radius: 5px; text-decoration: none; transition: 0.3s; }
-.link-block:hover { background: rgba(255,255,255,0.2); color: #ff3333; }
-.volver { margin-top: 20px; cursor: pointer; text-decoration: underline; }
-footer { margin-top: 40px; text-align: center; font-size: 0.9rem; opacity: 0.7; }
 </style>
 </head>
+
 <body>
 <div class="background"></div>
-<div id="intro" class="glitch-screen"><div class="glitch-text" data-text="UNGELIEBT">UNGELIEBT</div></div>
+
+<!-- ===== INTRO PRINCIPAL ===== -->
+<div id="intro" class="glitch-screen">
+  <div class="glitch-text" data-text="UNGELIEBT">UNGELIEBT</div>
+</div>
+
+<!-- ===== LANDING ===== -->
 <div class="landing" id="landing">
   <div class="option" id="btnPresskit">Presskit</div>
   <div class="option" id="btnHistoria">Historia</div>
 </div>
-<div id="transition" class="glitch-screen" style="display:none;"><div class="glitch-text" data-text="UNGELIEBT">UNGELIEBT</div></div>
 
+<!-- ===== TRANSICIÓN ===== -->
+<div id="transition" class="glitch-screen" style="display:none;">
+  <div class="glitch-text" data-text="UNGELIEBT">UNGELIEBT</div>
+</div>
+
+<!-- ===== PRESSKIT ===== -->
 <div class="main-content" id="presskitContent">
   <header>
     <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
@@ -147,24 +345,35 @@ footer { margin-top: 40px; text-align: center; font-size: 0.9rem; opacity: 0.7; 
     <div class="bio-container">
       <img src="foto 1.jpg" alt="Ungeliebt" class="bio-img">
       <div class="bio-text">
-        <div class="bio-block"><p>Luciano Aguirre, mejor conocido como Ungeliebt...</p></div>
-        <div class="bio-block"><p>Sus primeros lanzamientos...</p></div>
-        <div class="bio-block"><p>Actualmente se encuentra trabajando...</p></div>
+        <div class="bio-block">
+          <p>Luciano Aguirre, mejor conocido como Ungeliebt...</p>
+        </div>
       </div>
     </div>
 
     <h2 id="musica">Últimos lanzamientos</h2>
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/occultus_records/sets/profundo-y-silencioso-ep&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/occultus_records/sets/profundo-y-silencioso-ep&color=%23000000&auto_play=false">
+    </iframe>
 
     <div class="enlaces">
       <h2>Enlaces a lanzamientos</h2>
       <ul>
-        <li><a href="#">Profundo y Silencioso - EP</a></li>
-        <li><a href="#">Chains - EP</a></li>
-        <li><a href="#">Promise Land</a></li>
-        <li><a href="#">Redemption</a></li>
+        <li><a href="https://soundcloud.com/eclipse_recordings/sets/profundo-y-silencioso-ep">Profundo y Silencioso - EP</a></li>
+        <li><a href="https://soundcloud.com/trauma-records/sets/ungeliebt-chains">Chains - EP</a></li>
+        <li><a href="https://soundcloud.com/anaohltd/sets/promise-land">Promise Land</a></li>
+        <li><a href="https://soundcloud.com/anaohltd/sets/redemption">Redemption</a></li>
       </ul>
     </div>
+
+    <h2>DJ Sets y Podcast</h2>
+     <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/praxisbcn/praxis-series-012-ungeliebt&color=%23000000">
+    </iframe>
+
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ungeliebt/ungeliebt-podcast&color=%23000000">
+    </iframe>
 
     <h2 id="tech">Tech Rider</h2>
     <ul>
@@ -174,16 +383,18 @@ footer { margin-top: 40px; text-align: center; font-size: 0.9rem; opacity: 0.7; 
     </ul>
 
     <h2 id="contacto">Contacto</h2>
-    <a href="#" class="link-block">Instagram</a>
-    <a href="#" class="link-block">SoundCloud</a>
-    <a href="#" class="link-block">Bandcamp</a>
-    <a href="#" class="link-block">Resident Advisor</a>
-    <a href="#" class="link-block">Email</a>
+    <a href="https://www.instagram.com/ungeliebt_art" class="link-block">Instagram</a>
+    <a href="https://soundcloud.com/ungeliebt" class="link-block">SoundCloud</a>
+    <a href="https://ungeliebt.bandcamp.com" class="link-block">Bandcamp</a>
+    <a href="https://es.ra.co/dj/ungeliebt" class="link-block">Resident Advisor</a>
+    <a href="mailto:ungeliebt.ofc@gmail.com" class="link-block">Email</a>
+
     <div class="volver" onclick="volverInicio()">Volver</div>
     <footer>© 2025 Ungeliebt | Viuda Negra</footer>
   </section>
 </div>
 
+<!-- ===== HISTORIA ===== -->
 <div class="main-content" id="historiaContent">
   <section>
     <h1>Historia de Ungeliebt</h1>
@@ -194,39 +405,54 @@ footer { margin-top: 40px; text-align: center; font-size: 0.9rem; opacity: 0.7; 
 </div>
 
 <script>
+// Intro inicial
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('intro').style.display = 'none';
     document.getElementById('landing').classList.add('visible');
   }, 3000);
 });
+
+// Transición entre secciones
 const landing = document.getElementById('landing');
 const transition = document.getElementById('transition');
 const presskit = document.getElementById('presskitContent');
 const historia = document.getElementById('historiaContent');
+
 function showTransition(callback) {
   transition.style.display = 'flex';
   setTimeout(() => { transition.style.animation = 'fadeOut 1s ease 2s forwards'; }, 100);
   setTimeout(() => {
-    transition.style.display = 'none'; callback();
+    transition.style.display = 'none';
+    callback();
   }, 3000);
 }
+
 document.getElementById('btnPresskit').addEventListener('click', () => {
-  landing.classList.remove('visible'); showTransition(() => presskit.classList.add('visible'));
+  landing.classList.remove('visible');
+  showTransition(() => presskit.classList.add('visible'));
 });
+
 document.getElementById('btnHistoria').addEventListener('click', () => {
-  landing.classList.remove('visible'); showTransition(() => historia.classList.add('visible'));
+  landing.classList.remove('visible');
+  showTransition(() => historia.classList.add('visible'));
 });
+
 function volverInicio() {
-  presskit.classList.remove('visible'); historia.classList.remove('visible');
+  presskit.classList.remove('visible');
+  historia.classList.remove('visible');
   setTimeout(() => {
-    landing.style.display = 'flex'; setTimeout(() => landing.classList.add('visible'), 50);
+    landing.style.display = 'flex';
+    setTimeout(() => landing.classList.add('visible'), 50);
   }, 500);
 }
+
+// Menú hamburguesa
 const menuToggle = document.getElementById('menuToggle');
 const mainNav = document.getElementById('mainNav');
 menuToggle.addEventListener('click', () => {
-  mainNav.classList.toggle('active'); menuToggle.classList.toggle('active');
+  mainNav.classList.toggle('active');
+  menuToggle.classList.toggle('active');
 });
 </script>
 </body>
